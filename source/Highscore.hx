@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 
 using StringTools;
+
 class Highscore
 {
 	#if (haxe >= "4.0.0")
@@ -13,15 +14,9 @@ class Highscore
 	public static var songCombos:Map<String, String> = new Map<String, String>();
 	#end
 
-
 	public static function saveScore(song:String, score:Int = 0, ?diff:Int = 0):Void
 	{
 		var daSong:String = formatSong(song, diff);
-
-
-		#if !switch
-		NGio.postScore(score, song);
-		#end
 
 		if(!FlxG.save.data.botplay)
 		{
@@ -32,7 +27,7 @@ class Highscore
 			}
 			else
 				setScore(daSong, score);
-		}else trace('BotPlay detected. Score saving is disabled.');
+		} else trace('BotPlay detected. Score saving is disabled.');
 	}
 
 	public static function saveCombo(song:String, combo:String, ?diff:Int = 0):Void
@@ -54,11 +49,6 @@ class Highscore
 
 	public static function saveWeekScore(week:Int = 1, score:Int = 0, ?diff:Int = 0):Void
 	{
-
-		#if !switch
-		NGio.postScore(score, "Week " + week);
-		#end
-
 		if(!FlxG.save.data.botplay)
 		{
 			var daWeek:String = formatSong('week' + week, diff);
@@ -70,7 +60,7 @@ class Highscore
 			}
 			else
 				setScore(daWeek, score);
-		}else trace('BotPlay detected. Score saving is disabled.');
+		} else trace('BotPlay detected. Score saving is disabled.');
 	}
 
 	/**
